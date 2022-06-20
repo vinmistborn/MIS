@@ -13,7 +13,7 @@ namespace MIS.Infrastructure.Data.Configs
                    .IsRequired();
             builder.HasOne(p => p.GroupType)
                     .WithMany(p => p.Groups)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .OnDelete(DeleteBehavior.Restrict);
             builder.Property(p => p.Capacity)
                    .IsRequired();
             builder.Property(p => p.IsActive)                    
