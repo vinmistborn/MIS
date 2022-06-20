@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIS.Application", "MIS.Appl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIS.Infrastructure", "MIS.Infrastructure\MIS.Infrastructure.csproj", "{B8FADFB3-E699-4DBB-B509-0E700CC99ABD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIS.Shared", "MIS.Shared\MIS.Shared.csproj", "{AA2E8E19-E017-4AB2-9777-BD417A413D8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B8FADFB3-E699-4DBB-B509-0E700CC99ABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8FADFB3-E699-4DBB-B509-0E700CC99ABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8FADFB3-E699-4DBB-B509-0E700CC99ABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA2E8E19-E017-4AB2-9777-BD417A413D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA2E8E19-E017-4AB2-9777-BD417A413D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA2E8E19-E017-4AB2-9777-BD417A413D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA2E8E19-E017-4AB2-9777-BD417A413D8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
