@@ -25,7 +25,9 @@ namespace MIS.Application.Mappings
                 .ForMember(dest => dest.Teachers,
                            src => src.MapFrom<GroupTeacherResolver>())        
                 .ForMember(dest => dest.Code,
-                           src => src.MapFrom(x => x.Code));
+                           src => src.MapFrom(x => x.Code))
+                .ForMember(dest => dest.Branch,
+                           src => src.MapFrom<GroupBranchResolver>());
         }
     }
 }
