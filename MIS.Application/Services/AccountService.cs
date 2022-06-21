@@ -37,7 +37,7 @@ namespace MIS.Application.Services
         public async Task<AuthenticateResponse> Login(LoginDTO loginDTO)
         {            
             var user = await _userManager.FindByEmailAsync(loginDTO.Email);
-            if (user == null)
+            if (user is null)
             {
                 throw new InvalidEmailException(loginDTO.Email);
             }

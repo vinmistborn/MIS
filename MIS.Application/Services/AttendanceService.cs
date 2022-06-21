@@ -35,11 +35,6 @@ namespace MIS.Application.Services
                 throw new GroupEmptyException(group.Code);
             }
 
-            //if(group.Students.Count == 0)
-            //{
-            //    throw new GroupEmptyException(group.Code);
-            //}
-
             var attendances = new List<Attendance>();
             var students = group.StudentGroupHistory;
             foreach (var student in students)
@@ -68,9 +63,9 @@ namespace MIS.Application.Services
         {
             var attendance = await _repo.GetBySpecAsync(new AttendanceWithIncludesSpec(attendanceDTO.Id));
 
-            if(attendance == null)
+            if(attendance is null)
             {
-                throw new EntityNotFoundException();
+                throw new EntityNotFoundException("attendance", attendanceDTO.Id);
             }
 
             if (id != attendanceDTO.Id)

@@ -23,13 +23,13 @@ namespace MIS.API.Controllers
             return Ok(await _attendanceService.GetAllEntitiesSpecAsync(new AttendanceWithIncludesSpec()));
         }
 
-        [HttpGet("groupAttendance/{groupId}")]
+        [HttpGet("group-attendance/{groupId}")]
         public async Task<ActionResult<IEnumerable<AttendanceInfoDTO>>> GetGroupAttendance(int groupId)
         {
             return Ok(await _attendanceService.GetGroupAttendance(groupId));
         }
 
-        [HttpGet("studentAttendance/{studentId}")]
+        [HttpGet("student-attendance/{studentId}")]
         public async Task<ActionResult<IEnumerable<AttendanceInfoDTO>>> GetStudentAttendance(int studentId)
         {
             return Ok(await _attendanceService.GetStudentAttendance(studentId));

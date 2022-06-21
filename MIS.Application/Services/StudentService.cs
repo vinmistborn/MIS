@@ -35,7 +35,7 @@ namespace MIS.Application.Services
 
         public async Task<StudentInfoDTO> AddStudentAsync(StudentDTO studentDTO)
         {
-            if (studentDTO == null)
+            if (studentDTO is null)
             {
                 throw new ArgumentNullException();
             }
@@ -50,9 +50,9 @@ namespace MIS.Application.Services
         public async Task<StudentInfoDTO> AddGroupsToStudentAsync(int studentId, NewStudentGroups groups)
         {
             var student = await _repo.GetBySpecAsync(new StudentWithGroupSpec(studentId));
-            if (student == null)
+            if (student is null)
             {
-                throw new EntityNotFoundException(studentId);
+                throw new EntityNotFoundException("student",studentId);
             }
             foreach (var groupId in groups.GroupIds)
             {
@@ -77,9 +77,9 @@ namespace MIS.Application.Services
         {
             var student = await _repo.GetByIdAsync(id);
 
-            if (student == null)
+            if (student is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException("student",id);
             }
 
             student.IsActive = false;
@@ -101,9 +101,9 @@ namespace MIS.Application.Services
         {
             var student = await _repo.GetBySpecAsync(new StudentWithGroupSpec(studentId));
             
-            if(student == null)
+            if(student is null)
             {
-                throw new EntityNotFoundException(studentId);
+                throw new EntityNotFoundException("student", studentId);
             }
             
             var studentHistory = await _studentHistoryRepo.GetBySpecAsync(new StudentGroupHistorySpec(student.Id, group.GroupId));
@@ -123,7 +123,7 @@ namespace MIS.Application.Services
 
             var student = await _repo.GetByIdAsync(id);
 
-            if (student == null)
+            if (student is null)
             {
                 throw new ArgumentNullException();
             }

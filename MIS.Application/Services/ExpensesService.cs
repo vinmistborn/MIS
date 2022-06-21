@@ -32,7 +32,7 @@ namespace MIS.Application.Services
 
             var expensesLog = _mapper.Map<ExpensesLog>(expensesDTO);
             expensesLog.Date = addedExpense.Date;
-            expensesLog.User = expensesDTO.User;
+            expensesLog.User = _currentUserService.GetUserName();
             expensesLog.EventTime = DateTime.Now;
             expensesLog.OperationType = OperationType.Create;
             await _expensesLogRepo.AddAsync(expensesLog);
@@ -54,7 +54,7 @@ namespace MIS.Application.Services
                 Comment = updatedExpense.Comment,
                 BranchId = updatedExpense.BranchId,
                 Item = updatedExpense.Item,
-                User = expensesDTO.User,
+                User = _currentUserService.GetUserName(),
                 EventTime = DateTime.Now,
                 OperationType = OperationType.Update
             };

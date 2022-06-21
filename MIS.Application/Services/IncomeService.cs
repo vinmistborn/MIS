@@ -32,7 +32,7 @@ namespace MIS.Application.Services
             
             var incomeLog = _mapper.Map<IncomeLog>(incomeDTO);
             incomeLog.Date = addedIncome.Date;
-            incomeLog.User = incomeDTO.User;
+            incomeLog.User = _currentUserService.GetUserName();
             incomeLog.EventTime = DateTime.Now;
             incomeLog.OperationType = OperationType.Create;
             await _incomeLogRepo.AddAsync(incomeLog);
@@ -55,7 +55,7 @@ namespace MIS.Application.Services
                 BranchId = updatedIncome.BranchId,
                 StudentId = updatedIncome.StudentId,
                 GroupId = updatedIncome.GroupId,
-                User = incomeDTO.User,
+                User = _currentUserService.GetUserName(),
                 EventTime = DateTime.Now,
                 OperationType = OperationType.Update
             };

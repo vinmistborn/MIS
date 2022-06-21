@@ -34,7 +34,7 @@ namespace MIS.Application.Services
 
         public async Task<IEnumerable<TimetableInfoDTO>> AddTimetableSlotsAsync(AddTimetableDTO timetableDTO)
         {
-            if (timetableDTO == null)
+            if (timetableDTO is null)
             {
                 throw new ArgumentNullException();
             }
@@ -56,9 +56,9 @@ namespace MIS.Application.Services
         public override async Task<TimetableInfoDTO> UpdateEntityAsync(int id, UpdateTimetableDTO timetableDTO)
         {
             var timetable = await _repo.GetBySpecAsync(new TimetableSpec(id));
-            if (timetable == null)
+            if (timetable is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException("timetable",id);
             }
 
             if (id != timetableDTO.Id)
@@ -75,7 +75,7 @@ namespace MIS.Application.Services
 
         public async Task<IEnumerable<TimetableInfoDTO>> UpdateGroupTimetableAsync(UpdateGroupTimetableDTO timetableDTO)
         {
-            if(timetableDTO == null)
+            if(timetableDTO is null)
             {
                 throw new ArgumentNullException();
             }

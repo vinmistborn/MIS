@@ -20,7 +20,7 @@ namespace MIS.Application.Services
 
         public override async Task<RoomInfoDTO> AddEntityAsync(RoomDTO roomDTO)
         {
-            if (roomDTO == null)
+            if (roomDTO is null)
             {
                 throw new ArgumentNullException();
             }
@@ -31,7 +31,7 @@ namespace MIS.Application.Services
 
         public override async Task<RoomInfoDTO> UpdateEntityAsync(int id, RoomDTO roomDTO)
         {
-            if (roomDTO == null)
+            if (roomDTO is null)
             {
                 throw new ArgumentNullException();
             }

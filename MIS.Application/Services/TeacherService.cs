@@ -36,15 +36,17 @@ namespace MIS.Application.Services
         {
             var group = await _groupRepo.GetBySpecAsync(new GroupWithIncludesSpec(groupId));
             
-            if (group == null)
+            if (group is null)
             {
-                throw new EntityNotFoundException(groupId);
+                throw new EntityNotFoundException("group",groupId);
             }
             var teacher = await _userRepo.GetBySpecAsync(new TeacherWithIncludesSpec(teacherId));
-            if (teacher == null)
+            
+            if (teacher is null)
             {
-                throw new EntityNotFoundException(teacherId);
+                throw new EntityNotFoundException("teacher",teacherId);
             }
+            
             if (teacher.Groups.Contains(group))
             {
                 var groupDTO = _mapper.Map<GroupFullInfoDTO>(group);
@@ -52,6 +54,10 @@ namespace MIS.Application.Services
             }
             
             teacher.Groups.Add(group);
+            group.BranchId = teacher.BranchId;
+
+            await _groupRepo.SaveChangesAsync();
+
             await _groupTeacherRepo.AddAsync(new GroupTeacher(group, teacher));
             return _mapper.Map<TeacherInfoDTO>(teacher);
         }
@@ -59,9 +65,9 @@ namespace MIS.Application.Services
         public async Task<TeacherInfoDTO> RemoveGroupFromTeacherAsync(int groupId, int teacherId)
         {
             var group = await _groupRepo.GetBySpecAsync(new GroupWithIncludesSpec(groupId));
-            if (group == null)
+            if (group is null)
             {
-                throw new EntityNotFoundException(groupId);
+                throw new EntityNotFoundException("group",groupId);
             }
             var teacher = await _userRepo.GetBySpecAsync(new TeacherWithIncludesSpec(teacherId));
             teacher.Groups.Remove(group);

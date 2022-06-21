@@ -11,7 +11,8 @@ namespace MIS.Domain.Entities
         public int Capacity { get; set; }        
         public bool IsActive { get; set; }
         public int? NumOfStudents { get; set; }
-        public int CourseId { get; set; } 
+        public int CourseId { get; set; }
+        public int? BranchId { get; set; }       
         public ICollection<Student> Students { get; set; }
         public ICollection<Teacher> Teachers { get; set; }
         public ICollection<GroupTeacher> GroupTeachers { get; set; }
@@ -19,5 +20,6 @@ namespace MIS.Domain.Entities
         public GroupType GroupType { get; set; }
         public Course Course { get; set; }  
         public ICollection<StudentGroupHistory> StudentGroupHistory { get; set; }
+        public Branch Branch { get; set; }
     }
 }

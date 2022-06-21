@@ -28,7 +28,7 @@ namespace MIS.API.Controllers
             return Ok(await _teacherService.GetAllEntitiesSpecAsync(new TeacherWithIncludesSpec()));
         }
 
-        [HttpGet("teachers/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<TeacherInfoDTO>> GetTeacher(int id)
         {
             return Ok(await _teacherService.GetEntityInfoSpecAsync(new TeacherWithIncludesSpec(id)));
@@ -46,7 +46,7 @@ namespace MIS.API.Controllers
             return Ok(await _teacherService.RemoveGroupFromTeacherAsync(groupId, teacherId));
         }
 
-        [HttpGet("teacherGroups/{id}")]
+        [HttpGet("teacher-groups/{id}")]
         public async Task<ActionResult<ActionResult<IEnumerable<GroupFullInfoDTO>>>> GetTeacherGroups(int id)
         {
             return Ok(await _groupService.GetTeacherGroups(id));

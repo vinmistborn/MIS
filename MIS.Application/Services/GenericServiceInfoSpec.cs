@@ -30,9 +30,9 @@ namespace MIS.Application.Services
         {
             var entity = await _repo.GetBySpecAsync(specification);
 
-            if (entity == null)
+            if (entity is null)
             {
-                throw new EntityNotFoundException();
+                throw new EntityNotFoundException($"{typeof(TEntity).Name}");
             }
 
             return _mapper.Map<TInfoDTO>(entity);

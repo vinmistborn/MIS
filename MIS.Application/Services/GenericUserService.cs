@@ -53,9 +53,9 @@ namespace MIS.Application.Services
         public async Task<TInfoDTO> RemoveUserRoleAsync(int userId, string roleName)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
-            if (user == null)
+            if (user is null)
             {
-                throw new EntityNotFoundException(userId);
+                throw new EntityNotFoundException("user", userId);
             }
             await _userManager.RemoveFromRoleAsync(user, roleName);
             return _mapper.Map<TInfoDTO>(user);
@@ -64,9 +64,9 @@ namespace MIS.Application.Services
         public async Task<TInfoDTO> UpdateUserAsync(UserDTO userDTO)
         {
             var user = await _userManager.FindByIdAsync(userDTO.Id.ToString());
-            if (user == null)
+            if (user is null)
             {
-                throw new EntityNotFoundException(userDTO.Id);
+                throw new EntityNotFoundException("user", userDTO.Id);
             }
             user.FirstName = userDTO.FirstName;
             user.LastName = userDTO.LastName;

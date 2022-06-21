@@ -26,14 +26,14 @@ namespace MIS.API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("registerAdmin")]
+        [HttpPost("register-admin")]
         public async Task<IActionResult> RegisterAdmin(RegisterDTO registerDTO)
         {
             var user = await _userAccountService.RegisterUserAsync(registerDTO);
             return Ok(user);
         }
 
-        [HttpPost("registerTeacher")]
+        [HttpPost("register-teacher")]
         public async Task<IActionResult> RegisterTeacher(RegisterDTO registerDTO)
         {
             var user = await _teacherAccountService.RegisterUserAsync(registerDTO);

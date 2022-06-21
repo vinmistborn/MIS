@@ -36,7 +36,7 @@ namespace MIS.Application.Services
 
         public async Task<GroupInfoDTO> AddGroupAsync(AddGroupDTO groupDTO)
         {
-            if(groupDTO == null)
+            if(groupDTO is null)
             {
                 throw new ArgumentNullException("Please, enter a group");
             }
@@ -58,9 +58,9 @@ namespace MIS.Application.Services
         {
             var group = await _groupRepo.GetByIdAsync(id);
 
-            if (group == null)
+            if (group is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException("group",id);
             }
 
             group.IsActive = false;
@@ -108,13 +108,13 @@ namespace MIS.Application.Services
 
         public async Task<GroupFullInfoDTO> UpdateGroupAsync(int id, UpdateGroupDTO groupDTO)
         {
-            if(groupDTO == null)
+            if(groupDTO is null)
             {
-                throw new ArgumentException();
+                throw new ArgumentNullException();
             }
             if(id != groupDTO.Id)
             {
-                throw new ArgumentException($"Id - {id} does not match with group id - {groupDTO.Id}");
+                throw new ArgumentNullException($"Id - {id} does not match with group id - {groupDTO.Id}");
             }
             var group = await _groupRepo.GetBySpecAsync(new GroupWithIncludesSpec(id));
             var updatedGroup = _mapper.Map(groupDTO, group);
@@ -127,16 +127,16 @@ namespace MIS.Application.Services
         {
             var group = await _groupRepo.GetBySpecAsync(new GroupWithStudentsSpec(id));
             
-            if (group == null)
+            if (group is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException("group",id);
             }
 
             var course = _courseService.GetEntityInfoAsync(courseId.CourseId);
 
-            if (course == null)
+            if (course is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException("course",id);
             }
 
             BackgroundJob.Schedule<IStudentGroupHistoryService>(x => x.UpdateGroupCourseHistory(group.Id, course.Id),

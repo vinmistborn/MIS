@@ -23,7 +23,7 @@ namespace MIS.Application.Services
 
         public virtual async Task<TInfoDTO> AddEntityAsync(TDto entityDTO)
         {
-            if(entityDTO == null)
+            if(entityDTO is null)
             {
                 throw new ArgumentNullException();
             }
@@ -34,9 +34,9 @@ namespace MIS.Application.Services
         public async Task DeleteEntity(int id)
         {
             var entity = await _repo.GetByIdAsync(id);
-            if(entity == null)
+            if(entity is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException($"{typeof(TEntity).Name}",id);
             }
             await _repo.DeleteAsync(entity);
         }
@@ -50,9 +50,9 @@ namespace MIS.Application.Services
         public async Task<TDto> GetEntityAsync(int id)
         {
             var entity = await _repo.GetByIdAsync(id);
-            if (entity == null)
+            if (entity is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException($"{typeof(TEntity).Name}",id);
             }
 
             return _mapper.Map<TDto>(entity);
@@ -61,9 +61,9 @@ namespace MIS.Application.Services
         public async Task<TInfoDTO> GetEntityInfoAsync(int id)
         {
             var entity = await _repo.GetByIdAsync(id);
-            if(entity == null)
+            if(entity is null)
             {
-                throw new EntityNotFoundException(id);
+                throw new EntityNotFoundException($"{typeof(TEntity).Name}", id);
             }
 
             return _mapper.Map<TInfoDTO>(entity);
@@ -73,7 +73,7 @@ namespace MIS.Application.Services
         {
             var entity = _mapper.Map<TEntity>(entityDTO);
 
-            if (entityDTO == null)
+            if (entityDTO is null)
             {
                 throw new ArgumentNullException();
             }
