@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS.Application.DTOs.Timetable;
 using MIS.Application.Interfaces.Services;
 using MIS.Application.Specifications.TimetableSpec;
+using MIS.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class TimetableController : BaseController
     {
         private readonly ITimetableService _timetableService;

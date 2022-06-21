@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using MIS.Application.DTOs.Income;
 using MIS.Application.Interfaces.Services;
 using MIS.Application.Specifications.IncomeSpec;
-using MIS.Domain.Entities.Identity;
+using MIS.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
-{   
+{
+    [Authorize(Roles = Roles.Admin)]
     public class IncomeController : BaseController
     {
         private readonly IIncomeService _incomeService;

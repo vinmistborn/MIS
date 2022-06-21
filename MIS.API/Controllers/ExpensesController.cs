@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS.Application.DTOs.Expenses;
 using MIS.Application.Interfaces.Services;
 using MIS.Application.Specifications.ExpensesSpec;
+using MIS.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class ExpensesController : BaseController
     {
         private readonly IExpensesService _expensesService;

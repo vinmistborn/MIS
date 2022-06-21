@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS.Application.DTOs.Role;
 using MIS.Application.Interfaces.Services;
+using MIS.Shared;
 using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class AdminController : BaseController
     {
         private readonly IRoleService _roleService;
@@ -20,6 +23,7 @@ namespace MIS.API.Controllers
             _teacherService = teacherService;
         }
 
+        
         [HttpGet("roles")]
         public async Task<IActionResult> GetAllRoles()
         {

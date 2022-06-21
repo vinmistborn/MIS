@@ -59,6 +59,8 @@ namespace MIS.Application.Services
         public async Task<AuthorizeResponse<TDto>> RegisterUserAsync(RegisterDTO registerDTO)
         {
             var response = new AuthorizeResponse<TDto>();
+            await CheckForExistingUserAsync(registerDTO);
+
             var user = new TEntity
             {
                 FirstName = registerDTO.FirstName,
@@ -77,6 +79,23 @@ namespace MIS.Application.Services
             }
             response.User = _mapper.Map<TDto>(user);
             return response;
+        }
+
+        public async Task CheckForExistingUserAsync(RegisterDTO newAccount)
+        {
+            var existingAccountWithEmail = await _userManager.FindByEmailAsync(newAccount.Email);
+            
+            if(existingAccountWithEmail is not null)
+            {
+                throw new ExistingEmailException(newAccount.Email);
+            }
+
+            var existingAccountWithUserName = await _userManager.FindByNameAsync(newAccount.UserName);
+
+            if(existingAccountWithUserName is not null)
+            {
+                throw new ExistingUserNameException(newAccount.UserName);
+            }
         }
     }
 }

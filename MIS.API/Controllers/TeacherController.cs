@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS.Application.DTOs.Group;
 using MIS.Application.DTOs.Teacher;
 using MIS.Application.DTOs.User;
 using MIS.Application.Interfaces.Services;
 using MIS.Application.Specifications;
 using MIS.Domain.Enums;
+using MIS.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class TeacherController : BaseController
     {
         private readonly ITeacherService _teacherService;
@@ -22,12 +25,14 @@ namespace MIS.API.Controllers
             _groupService = groupService;
         }
 
+        [Authorize(Roles = Roles.Teacher)]
         [HttpGet("teachers")]
         public async Task<ActionResult<IEnumerable<TeacherInfoDTO>>> GetAllTeachers()
         {
             return Ok(await _teacherService.GetAllEntitiesSpecAsync(new TeacherWithIncludesSpec()));
         }
 
+        [Authorize(Roles = Roles.Teacher)]
         [HttpGet("{id}")]
         public async Task<ActionResult<TeacherInfoDTO>> GetTeacher(int id)
         {
@@ -46,6 +51,7 @@ namespace MIS.API.Controllers
             return Ok(await _teacherService.RemoveGroupFromTeacherAsync(groupId, teacherId));
         }
 
+        [Authorize(Roles = Roles.Teacher)]
         [HttpGet("teacher-groups/{id}")]
         public async Task<ActionResult<ActionResult<IEnumerable<GroupFullInfoDTO>>>> GetTeacherGroups(int id)
         {

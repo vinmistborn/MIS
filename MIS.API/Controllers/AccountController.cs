@@ -5,6 +5,8 @@ using MIS.Domain.Entities;
 using MIS.Domain.Entities.Identity;
 using MIS.Application.Interfaces.Services;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using MIS.Shared;
 
 namespace MIS.API.Controllers
 {
@@ -26,6 +28,7 @@ namespace MIS.API.Controllers
             return Ok(response);
         }
 
+        //[Authorize(Roles = Roles.Admin)]
         [HttpPost("register-admin")]
         public async Task<IActionResult> RegisterAdmin(RegisterDTO registerDTO)
         {
@@ -33,6 +36,7 @@ namespace MIS.API.Controllers
             return Ok(user);
         }
 
+        //[Authorize(Roles = Roles.Admin)]
         [HttpPost("register-teacher")]
         public async Task<IActionResult> RegisterTeacher(RegisterDTO registerDTO)
         {

@@ -6,9 +6,12 @@ using MIS.Application.Specifications.UserSpec;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MIS.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
+using MIS.Shared;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class UserController : BaseController
     {
         private readonly IUserService _userService;

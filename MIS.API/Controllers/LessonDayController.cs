@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS.Application.DTOs.LessonDays;
 using MIS.Application.Interfaces.Services;
+using MIS.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class LessonDayController : BaseController
     {
         private readonly ILessonDayService _lessonDayService;

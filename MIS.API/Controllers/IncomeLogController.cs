@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS.Application.Interfaces.Services;
 using MIS.Application.Specifications.IncomeLogSpec;
+using MIS.Shared;
 using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class IncomeLogController : BaseController
     {
         private readonly IIncomeLogService _incomeLogService;

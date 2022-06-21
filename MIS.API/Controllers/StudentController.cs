@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MIS.Application.DTOs.Student;
 using MIS.Application.DTOs.StudentGroupHistory;
 using MIS.Application.Interfaces.Services;
 using MIS.Application.Specifications.StudentSpec;
+using MIS.Shared;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MIS.API.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class StudentController : BaseController
     {
         private readonly IStudentService _studentService;
